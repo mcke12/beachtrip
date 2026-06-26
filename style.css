@@ -1,46 +1,284 @@
-body{
-    font-family: Arial, Helvetica, sans-serif;
-    background:#f4f9fc;
-    margin:30px;
+/* ── Tokens ─────────────────────────────────────────── */
+:root {
+    --sand:       #FAF7F2;
+    --ocean:      #1A5F7A;
+    --ocean-lt:   #E8F4F8;
+    --coral:      #E8714A;
+    --gold:       #D4A853;
+    --rose:       #C2637A;
+    --rose-lt:    #FDF0F3;
+    --ink:        #1C2B33;
+    --muted:      #7A8E97;
+    --white:      #FFFFFF;
+
+    --radius:     14px;
+    --shadow:     0 2px 12px rgba(26,95,122,.10);
+    --shadow-hover: 0 6px 24px rgba(26,95,122,.16);
+    --transition: 200ms ease;
 }
 
-h1{
-    text-align:center;
-    color:#0086b3;
+/* ── Reset ───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Base ────────────────────────────────────────────── */
+body {
+    font-family: 'DM Sans', Arial, sans-serif;
+    background: var(--sand);
+    color: var(--ink);
+    min-height: 100vh;
 }
 
-.trip-info{
-    background:white;
-    padding:20px;
-    border-radius:10px;
-    margin-bottom:25px;
-    box-shadow:0 0 8px rgba(0,0,0,.1);
+/* ── Header ──────────────────────────────────────────── */
+header {
+    background: linear-gradient(135deg, var(--ocean) 0%, #0d3d52 100%);
+    padding: 48px 24px 52px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
-.category{
-    background:white;
-    margin-bottom:20px;
-    padding:20px;
-    border-radius:10px;
-    box-shadow:0 0 8px rgba(0,0,0,.1);
+header::before {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 32px;
+    background: var(--sand);
+    clip-path: ellipse(55% 100% at 50% 100%);
 }
 
-.category h2{
-    color:#0077aa;
+/* Decorative wave circles */
+header::after {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    border: 40px solid rgba(255,255,255,.05);
+    pointer-events: none;
 }
 
-label{
-    display:block;
-    padding:6px;
-    cursor:pointer;
+.header-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+    margin: 0 auto;
 }
 
-input[type="checkbox"]{
-    transform:scale(1.2);
-    margin-right:10px;
+.header-eyebrow {
+    font-size: .75rem;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
 }
 
-.checked{
-    text-decoration:line-through;
-    color:gray;
+h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 28px;
+}
+
+h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gold);
+}
+
+.trip-pills {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.pill {
+    display: inline-block;
+    padding: 7px 16px;
+    border-radius: 99px;
+    font-size: .85rem;
+    font-weight: 600;
+}
+
+.pill.beach {
+    background: rgba(255,255,255,.15);
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,.25);
+}
+
+.pill.wedding {
+    background: var(--rose);
+    color: var(--white);
+}
+
+/* ── Main layout ─────────────────────────────────────── */
+main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 32px 20px 60px;
+}
+
+/* ── Progress bar ────────────────────────────────────── */
+.progress-bar-wrap {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow);
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: .82rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 10px;
+}
+
+.progress-track {
+    height: 8px;
+    background: var(--ocean-lt);
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--ocean), var(--coral));
+    border-radius: 99px;
+    transition: width 400ms ease;
+}
+
+/* ── Category section headings ───────────────────────── */
+.section-label {
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 32px 0 12px 4px;
+}
+
+.section-label:first-child { margin-top: 0; }
+
+/* ── Category card ───────────────────────────────────── */
+.category {
+    background: var(--white);
+    margin-bottom: 14px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    border-left: 4px solid var(--ocean);
+    transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.category:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-1px);
+}
+
+.category.wedding-card {
+    border-left-color: var(--rose);
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px 12px;
+    cursor: pointer;
+    user-select: none;
+    gap: 8px;
+}
+
+.category h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ink);
+    flex: 1;
+}
+
+.category.wedding-card h2 { color: var(--rose); }
+.category:not(.wedding-card) h2 { color: var(--ocean); }
+
+.category-count {
+    font-size: .75rem;
+    font-weight: 600;
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+.category-items {
+    padding: 4px 20px 16px;
+    border-top: 1px solid rgba(0,0,0,.05);
+}
+
+/* ── Labels / checkboxes ─────────────────────────────── */
+label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 4px;
+    cursor: pointer;
+    font-size: .95rem;
+    border-radius: 8px;
+    transition: background var(--transition);
+}
+
+label:hover { background: var(--ocean-lt); }
+
+.wedding-card label:hover { background: var(--rose-lt); }
+
+/* Hide native checkbox */
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px; height: 20px;
+    min-width: 20px;
+    border: 2px solid #c5d5dc;
+    border-radius: 5px;
+    background: var(--white);
+    cursor: pointer;
+    position: relative;
+    transition: border-color var(--transition), background var(--transition);
+}
+
+input[type="checkbox"]:checked {
+    background: var(--ocean);
+    border-color: var(--ocean);
+}
+
+.wedding-card input[type="checkbox"]:checked {
+    background: var(--rose);
+    border-color: var(--rose);
+}
+
+input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 2px; left: 5px;
+    width: 6px; height: 10px;
+    border: 2px solid white;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+}
+
+.checked {
+    text-decoration: line-through;
+    color: var(--muted);
+}
+
+/* ── Responsive ──────────────────────────────────────── */
+@media (max-width: 480px) {
+    header { padding: 36px 20px 44px; }
+    main { padding: 24px 14px 48px; }
 }
