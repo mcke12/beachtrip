@@ -1,0 +1,46 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background:#f4f9fc;
+    margin:30px;
+}
+
+h1{
+    text-align:center;
+    color:#0086b3;
+}
+
+.trip-info{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    margin-bottom:25px;
+    box-shadow:0 0 8px rgba(0,0,0,.1);
+}
+
+.category{
+    background:white;
+    margin-bottom:20px;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 8px rgba(0,0,0,.1);
+}
+
+.category h2{
+    color:#0077aa;
+}
+
+label{
+    display:block;
+    padding:6px;
+    cursor:pointer;
+}
+
+input[type="checkbox"]{
+    transform:scale(1.2);
+    margin-right:10px;
+}
+
+.checked{
+    text-decoration:line-through;
+    color:gray;
+}
