@@ -1,19 +1,20 @@
 /* ── Tokens ─────────────────────────────────────────── */
 :root {
-    --sand:       #FAF7F2;
-    --ocean:      #1A5F7A;
-    --ocean-lt:   #E8F4F8;
-    --coral:      #E8714A;
-    --gold:       #D4A853;
-    --rose:       #C2637A;
-    --rose-lt:    #FDF0F3;
-    --ink:        #1C2B33;
-    --muted:      #7A8E97;
+    --peach:      #FFF8F2;
+    --mango:      #E8521A;
+    --mango-lt:   #FEF0E8;
+    --yellow:     #F5C842;
+    --yellow-lt:  #FFFBE8;
+    --pink:       #E8407A;
+    --pink-lt:    #FEF0F5;
+    --coral:      #FF8C5A;
+    --ink:        #2A1A0E;
+    --muted:      #9A7E6F;
     --white:      #FFFFFF;
 
     --radius:     14px;
-    --shadow:     0 2px 12px rgba(26,95,122,.10);
-    --shadow-hover: 0 6px 24px rgba(26,95,122,.16);
+    --shadow:     0 2px 12px rgba(232,82,26,.10);
+    --shadow-hover: 0 6px 24px rgba(232,82,26,.18);
     --transition: 200ms ease;
 }
 
@@ -23,15 +24,15 @@
 /* ── Base ────────────────────────────────────────────── */
 body {
     font-family: 'DM Sans', Arial, sans-serif;
-    background: var(--sand);
+    background: var(--peach);
     color: var(--ink);
     min-height: 100vh;
 }
 
 /* ── Header ──────────────────────────────────────────── */
 header {
-    background: linear-gradient(135deg, var(--ocean) 0%, #0d3d52 100%);
-    padding: 48px 24px 52px;
+    background: linear-gradient(135deg, #C93A10 0%, #E8521A 40%, #F5A623 100%);
+    padding: 44px 24px 56px;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -42,50 +43,59 @@ header::before {
     position: absolute;
     bottom: -2px; left: 0; right: 0;
     height: 32px;
-    background: var(--sand);
+    background: var(--peach);
     clip-path: ellipse(55% 100% at 50% 100%);
 }
 
-/* Decorative wave circles */
 header::after {
     content: '';
     position: absolute;
-    top: -60px; right: -60px;
-    width: 260px; height: 260px;
+    top: -80px; right: -80px;
+    width: 300px; height: 300px;
     border-radius: 50%;
-    border: 40px solid rgba(255,255,255,.05);
+    border: 50px solid rgba(255,255,255,.07);
+    pointer-events: none;
+}
+
+/* second decorative circle */
+header .deco-circle {
+    position: absolute;
+    bottom: -40px; left: -60px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 36px solid rgba(255,255,255,.05);
     pointer-events: none;
 }
 
 .header-inner {
     position: relative;
     z-index: 1;
-    max-width: 640px;
+    max-width: 680px;
     margin: 0 auto;
 }
 
 .header-eyebrow {
-    font-size: .75rem;
+    font-size: .72rem;
     font-weight: 600;
-    letter-spacing: .12em;
+    letter-spacing: .14em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--yellow);
     margin-bottom: 14px;
 }
 
 h1 {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: clamp(1.8rem, 5vw, 2.9rem);
     font-weight: 700;
     color: var(--white);
-    line-height: 1.15;
-    margin-bottom: 28px;
+    line-height: 1.18;
+    margin-bottom: 22px;
 }
 
 h1 em {
     font-style: italic;
     font-weight: 400;
-    color: var(--gold);
+    color: var(--yellow);
 }
 
 .trip-pills {
@@ -93,57 +103,168 @@ h1 em {
     justify-content: center;
     gap: 10px;
     flex-wrap: wrap;
+    margin-bottom: 24px;
 }
 
 .pill {
     display: inline-block;
-    padding: 7px 16px;
+    padding: 6px 16px;
     border-radius: 99px;
-    font-size: .85rem;
+    font-size: .82rem;
     font-weight: 600;
 }
 
 .pill.beach {
-    background: rgba(255,255,255,.15);
+    background: var(--pink);
     color: var(--white);
-    border: 1px solid rgba(255,255,255,.25);
+    border: 1px solid rgba(255,255,255,.3);
 }
 
 .pill.wedding {
-    background: var(--rose);
+    background: var(--pink);
     color: var(--white);
+    border: 1px solid rgba(255,255,255,.3);
 }
 
-/* ── Main layout ─────────────────────────────────────── */
-main {
+/* ── Header bottom: weather + quote ─────────────────── */
+.header-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+}
+
+/* ── Weather widget ──────────────────────────────────── */
+.weather-widget {
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.25);
+    backdrop-filter: blur(6px);
+    border-radius: 12px;
+    padding: 10px 18px;
+    color: var(--white);
+    font-size: .88rem;
+    font-weight: 500;
+    min-width: 160px;
+    text-align: center;
+}
+
+.weather-loading { opacity: .7; font-style: italic; }
+
+.weather-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.weather-icon { font-size: 1.8rem; line-height: 1; }
+
+.weather-temp {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: 'Playfair Display', Georgia, serif;
+    line-height: 1;
+}
+
+.weather-desc {
+    font-size: .75rem;
+    opacity: .85;
+    margin-top: 3px;
+    text-transform: capitalize;
+}
+
+.weather-location {
+    font-size: .68rem;
+    opacity: .65;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+
+/* ── Beach quote ─────────────────────────────────────── */
+.quote-box {
+    background: var(--yellow);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 12px;
+    padding: 10px 18px;
+    max-width: 320px;
+    text-align: center;
+}
+
+.beach-quote {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: .9rem;
+    color: rgb(0, 0, 0);
+    line-height: 1.5;
+    transition: opacity 600ms ease;
+}
+
+.beach-quote.fade { opacity: 0; }
+
+/* ── Progress subheader ──────────────────────────────── */
+.progress-subheader {
+    background: var(--white);
+    border-bottom: 1px solid rgba(232,82,26,.1);
+    box-shadow: 0 2px 10px rgba(232,82,26,.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.progress-subheader-inner {
     max-width: 760px;
     margin: 0 auto;
-    padding: 32px 20px 60px;
-}
-
-/* ── Progress bar ────────────────────────────────────── */
-.progress-bar-wrap {
-    background: var(--white);
-    border-radius: var(--radius);
-    padding: 18px 22px;
-    margin-bottom: 28px;
-    box-shadow: var(--shadow);
-}
-
-.progress-label {
+    padding: 14px 20px;
     display: flex;
-    justify-content: space-between;
-    font-size: .82rem;
+    align-items: center;
+    gap: 20px;
+}
+
+.progress-pct-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1;
+    min-width: 56px;
+}
+
+.progress-pct-num {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--mango);
+    line-height: 1;
+}
+
+.progress-pct-label {
+    font-size: .62rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 2px;
+}
+
+.progress-right {
+    flex: 1;
+}
+
+.progress-count-label {
+    font-size: .75rem;
     font-weight: 600;
     color: var(--muted);
     text-transform: uppercase;
     letter-spacing: .08em;
-    margin-bottom: 10px;
+    margin-bottom: 7px;
+    text-align: right;
 }
 
 .progress-track {
-    height: 8px;
-    background: var(--ocean-lt);
+    height: 10px;
+    background: var(--mango-lt);
     border-radius: 99px;
     overflow: hidden;
 }
@@ -151,22 +272,56 @@ main {
 .progress-fill {
     height: 100%;
     width: 0%;
-    background: linear-gradient(90deg, var(--ocean), var(--coral));
+    background: linear-gradient(90deg, var(--mango), var(--yellow), var(--pink));
     border-radius: 99px;
     transition: width 400ms ease;
 }
 
-/* ── Category section headings ───────────────────────── */
-.section-label {
-    font-size: .7rem;
-    font-weight: 700;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin: 32px 0 12px 4px;
+/* ── Main layout ─────────────────────────────────────── */
+main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 28px 20px 60px;
 }
 
-.section-label:first-child { margin-top: 0; }
+/* ── Tabs ────────────────────────────────────────────── */
+.tab-nav {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 24px;
+    background: var(--white);
+    padding: 6px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 10px 6px;
+    border: none;
+    background: transparent;
+    border-radius: 10px;
+    font-family: 'DM Sans', Arial, sans-serif;
+    font-size: .78rem;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+    transition: background var(--transition), color var(--transition);
+    white-space: nowrap;
+}
+
+.tab-btn:hover:not(.active) {
+    background: var(--mango-lt);
+    color: var(--mango);
+}
+
+.tab-btn.active { background: var(--mango); color: var(--white); }
+.tab-btn[data-tab="1"].active { background: var(--pink); }
+.tab-btn[data-tab="2"].active { background: var(--yellow); color: var(--ink); }
+.tab-btn[data-tab="3"].active { background: #6BBF7A; color: var(--white); }
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
 
 /* ── Category card ───────────────────────────────────── */
 .category {
@@ -175,7 +330,7 @@ main {
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     overflow: hidden;
-    border-left: 4px solid var(--ocean);
+    border-left: 4px solid var(--mango);
     transition: box-shadow var(--transition), transform var(--transition);
 }
 
@@ -184,17 +339,14 @@ main {
     transform: translateY(-1px);
 }
 
-.category.wedding-card {
-    border-left-color: var(--rose);
-}
+.category.wedding-card { border-left-color: var(--pink); }
+.category.shopping-card { border-left-color: var(--yellow); }
 
 .category-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 16px 20px 12px;
-    cursor: pointer;
-    user-select: none;
     gap: 8px;
 }
 
@@ -202,12 +354,12 @@ main {
     font-family: 'Playfair Display', Georgia, serif;
     font-size: 1.1rem;
     font-weight: 700;
-    color: var(--ink);
+    color: var(--mango);
     flex: 1;
 }
 
-.category.wedding-card h2 { color: var(--rose); }
-.category:not(.wedding-card) h2 { color: var(--ocean); }
+.category.wedding-card h2 { color: var(--pink); }
+.category.shopping-card h2 { color: #8A6B00; }
 
 .category-count {
     font-size: .75rem;
@@ -221,8 +373,8 @@ main {
     border-top: 1px solid rgba(0,0,0,.05);
 }
 
-/* ── Labels / checkboxes ─────────────────────────────── */
-label {
+/* ── Item rows ───────────────────────────────────────── */
+.item-row {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -231,19 +383,20 @@ label {
     font-size: .95rem;
     border-radius: 8px;
     transition: background var(--transition);
+    position: relative;
 }
 
-label:hover { background: var(--ocean-lt); }
+.item-row:hover { background: var(--mango-lt); }
+.wedding-card .item-row:hover { background: var(--pink-lt); }
+.shopping-card .item-row:hover { background: var(--yellow-lt); }
 
-.wedding-card label:hover { background: var(--rose-lt); }
-
-/* Hide native checkbox */
+/* ── Checkboxes ──────────────────────────────────────── */
 input[type="checkbox"] {
     appearance: none;
     -webkit-appearance: none;
     width: 20px; height: 20px;
     min-width: 20px;
-    border: 2px solid #c5d5dc;
+    border: 2px solid #ddc9be;
     border-radius: 5px;
     background: var(--white);
     cursor: pointer;
@@ -251,15 +404,9 @@ input[type="checkbox"] {
     transition: border-color var(--transition), background var(--transition);
 }
 
-input[type="checkbox"]:checked {
-    background: var(--ocean);
-    border-color: var(--ocean);
-}
-
-.wedding-card input[type="checkbox"]:checked {
-    background: var(--rose);
-    border-color: var(--rose);
-}
+input[type="checkbox"]:checked { background: var(--mango); border-color: var(--mango); }
+.wedding-card input[type="checkbox"]:checked { background: var(--pink); border-color: var(--pink); }
+.shopping-card input[type="checkbox"]:checked { background: #F5C842; border-color: #D4A800; }
 
 input[type="checkbox"]:checked::after {
     content: '';
@@ -272,13 +419,147 @@ input[type="checkbox"]:checked::after {
     transform: rotate(45deg);
 }
 
+.shopping-card input[type="checkbox"]:checked::after { border-color: var(--ink); }
+
 .checked {
     text-decoration: line-through;
     color: var(--muted);
 }
 
+/* ── Delete button ───────────────────────────────────── */
+.delete-btn {
+    margin-left: auto;
+    background: none;
+    border: none;
+    color: #ddc9be;
+    font-size: 1.2rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 4px;
+    border-radius: 4px;
+    opacity: 0;
+    transition: color var(--transition), opacity var(--transition);
+    flex-shrink: 0;
+}
+
+.item-row:hover .delete-btn { opacity: 1; }
+.delete-btn:hover { color: var(--pink); }
+
+/* ── Add item row ────────────────────────────────────── */
+.add-row { margin-top: 6px; padding: 4px 4px 0; }
+
+.add-trigger {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: none;
+    border: none;
+    font-family: 'DM Sans', Arial, sans-serif;
+    font-size: .88rem;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 6px 4px;
+    border-radius: 8px;
+    transition: color var(--transition), background var(--transition);
+    width: 100%;
+    text-align: left;
+}
+
+.add-trigger:hover { color: var(--mango); background: var(--mango-lt); }
+.wedding-card .add-trigger:hover { color: var(--pink); background: var(--pink-lt); }
+.shopping-card .add-trigger:hover { color: #8A6B00; background: var(--yellow-lt); }
+
+.add-plus {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    border: 2px dashed currentColor;
+    font-size: 1rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.add-input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0 6px;
+    flex-wrap: wrap;
+}
+
+.add-input-wrap.hidden, .add-trigger.hidden { display: none; }
+
+.add-input {
+    flex: 1;
+    min-width: 0;
+    padding: 7px 12px;
+    border: 2px solid var(--mango-lt);
+    border-radius: 8px;
+    font-family: 'DM Sans', Arial, sans-serif;
+    font-size: .9rem;
+    color: var(--ink);
+    background: var(--white);
+    outline: none;
+    transition: border-color var(--transition);
+}
+
+.add-input:focus { border-color: var(--mango); }
+.wedding-card .add-input:focus { border-color: var(--pink); }
+.shopping-card .add-input:focus { border-color: var(--yellow); }
+
+.add-confirm {
+    padding: 7px 14px;
+    border: none;
+    border-radius: 8px;
+    background: var(--mango);
+    color: var(--white);
+    font-family: 'DM Sans', Arial, sans-serif;
+    font-size: .85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity var(--transition);
+    white-space: nowrap;
+}
+
+.add-confirm:hover { opacity: .85; }
+.add-confirm.wedding { background: var(--pink); }
+.add-confirm.shopping { background: var(--yellow); color: var(--ink); }
+
+.add-cancel {
+    padding: 7px 14px;
+    border: 2px solid #e8d5cb;
+    border-radius: 8px;
+    background: none;
+    color: var(--muted);
+    font-family: 'DM Sans', Arial, sans-serif;
+    font-size: .85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color var(--transition), color var(--transition);
+    white-space: nowrap;
+}
+
+.add-cancel:hover { border-color: var(--muted); color: var(--ink); }
+
+/* ── Shopping tab empty state ────────────────────────── */
+.shopping-empty {
+    text-align: center;
+    padding: 32px 20px;
+    color: var(--muted);
+    font-style: italic;
+    font-size: .9rem;
+}
+
 /* ── Responsive ──────────────────────────────────────── */
-@media (max-width: 480px) {
-    header { padding: 36px 20px 44px; }
-    main { padding: 24px 14px 48px; }
+@media (max-width: 520px) {
+    header { padding: 32px 16px 48px; }
+    .header-bottom { flex-direction: column; gap: 12px; }
+    .quote-box { max-width: 100%; }
+    main { padding: 20px 12px 48px; }
+    .progress-subheader-inner { padding: 10px 14px; gap: 14px; }
+    .progress-pct-num { font-size: 1.6rem; }
+    .tab-btn { font-size: .7rem; padding: 9px 3px; }
 }
