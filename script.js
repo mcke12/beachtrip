@@ -85,27 +85,27 @@ loadWeather();
 const packingList = {
 
 "Beach Clothing": [
-    "2-3 Swimsuits", "Cover-up", "T-shirts", "Tank Tops", "Shorts",
-    "6 Pajamas", "Underwear", "Socks", "Flip Flops", "Hat", "Sunglasses"
+    "Swimsuits", "Cover-up", "T-shirts", "Tank Tops", "Shorts",
+    "Pajamas", "Undergarments", "Socks", "Running Shoes", "Flip Flops", "Hat", "Sunglasses"
 ],
 "Beach Essentials": [
     "Beach Towels", "Sunscreen", "Aloe Vera", "Beach Bag", "Water Bottle",
-    "Cooler", "Chair", "Umbrella", "Book", "Speaker"
+    "Cooler", "Beach Chair", "Umbrella", "Book", "Speaker"
 ],
 "Toiletries": [
-    "Toothbrush", "Toothpaste", "Deodorant", "Shampoo", "Conditioner",
+    "Toothbrush", "Toothpaste", "Retainer", "Deodorant", "Perfume", "Shampoo", "Conditioner",
     "Body Wash", "Hair Brush", "Hair Dryer", "Curling/Straightening Iron",
     "Razor", "Makeup", "Medications"
 ],
 "Electronics": [
     "Phone Charger", "Watch Charger", "Laptop", "Laptop Charger",
-    "Headphones", "Portable Charger"
+    "Headphones", "Portable Charger", "Disposable Camera"
 ],
 "Food & Snacks": [
     "Snacks", "Drinks", "Coffee", "Ice"
 ],
 "Wedding Clothes": [
-    "Wedding Guest Attire", "Shoes", "Jewelry", "Purse", "Shawl", "Undergarments"
+    "Wedding Guest Attire", "Shoes", "Jewelry", "Purse", "Undergarments"
 ],
 "Wedding Toiletries": [
     "Hair Products", "Makeup Bag", "Perfume", "Nail Kit"
@@ -113,7 +113,7 @@ const packingList = {
 "Before Leaving Home": [
     "Wallet", "Driver's License", "Keys", "Lock Doors",
     "Take Out Trash", "Set Thermostat", "Charge Phone",
-    "Hotel Reservations", "Wedding Invitation"
+    "Hotel Reservations", "Wedding Invitation", "Plans for the dog"
 ]
 
 };
